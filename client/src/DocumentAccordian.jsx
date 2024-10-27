@@ -12,7 +12,7 @@ const DocumentAccordian = ({ _id, dbId, collId, updatedCollData, dbName, collect
     const [editorHeights, setEditorHeights] = useState([]);
 
     const fetchDocData = async () => {
-        const response = await axios.post('http://localhost:3001/api/readDoc', { _id, dbId, collId });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/readDoc', { _id, dbId, collId });
         setDocData(response.data);
         console.log(`Data received from readDoc method: ${response.data}`);
     };
@@ -22,7 +22,7 @@ const DocumentAccordian = ({ _id, dbId, collId, updatedCollData, dbName, collect
     }, [openValue, openValue2, updatedCollData]);
 
     const handleClick = async (field) => {
-        const response = await axios.post('http://localhost:3001/api/deleteDoc', { _id, dbId, collId, field });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/deleteDoc', { _id, dbId, collId, field });
         console.log(response.data);
         fetchDocData();
     };

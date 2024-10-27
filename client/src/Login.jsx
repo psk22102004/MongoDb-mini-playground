@@ -10,7 +10,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post('http://localhost:3001/api/validateUser', { userName, password });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/validateUser', { userName, password });
         console.log(`response.data is ${JSON.stringify(response.data)}`);
         if (response.data.message === 'existing user') {
             navigate(`/home/${userName}`, { state: { _id: response.data._id, userName } });

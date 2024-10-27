@@ -35,14 +35,14 @@ const AddStuffForm = ({ openValue, setOpenValue, _id, dbName, collName, document
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/api/createDatabase', { _id, dbName: newDbName });
+            const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/createDatabase', { _id, dbName: newDbName });
             const dbId = response.data;
 
-            const response2 = await axios.post('http://localhost:3001/api/createCollection', { _id, dbId, collectionName: newCollName });
+            const response2 = await axios.post('https://mongodb-mini-playground.onrender.com/api/createCollection', { _id, dbId, collectionName: newCollName });
             const collId = response2.data;
 
             // Send newDocs as a JSON string
-            await axios.post('http://localhost:3001/api/createDoc', { _id, dbId, collId, documentData: newDocs });
+            await axios.post('https://mongodb-mini-playground.onrender.com/api/createDoc', { _id, dbId, collId, documentData: newDocs });
 
             handleClose(); // Close the modal after submission
         } catch (error) {

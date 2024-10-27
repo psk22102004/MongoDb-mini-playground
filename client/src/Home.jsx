@@ -46,7 +46,7 @@ const Home = () => {
   const handleUserNameChange = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/changeUserName', { _id, newUserName });
+      const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/changeUserName', { _id, newUserName });
       console.log(response.data);
       setNewUserName(response.data.userName); // Update the displayed username
       handleClose(); // Close the modal after updating
@@ -58,7 +58,7 @@ const Home = () => {
   // Function to handle profile deletion
   const handleDeleteProfile = async () => {
     try {
-      await axios.post('http://localhost:3001/api/deleteUser', { _id });
+      await axios.post('https://mongodb-mini-playground.onrender.com/api/deleteUser', { _id });
       navigate('/'); // Redirect to the home page after deletion
     } catch (error) {
       console.error("Error deleting profile:", error);

@@ -38,7 +38,7 @@ const DatabaseAccordian = ({ _id, openValueOfDb }) => {
     const [newDbName, setNewDbName] = useState('');
 
     const fetchData = async () => {
-        const response = await axios.get(`http://localhost:3001/api/readDatabases/${_id}`);
+        const response = await axios.get(`https://mongodb-mini-playground.onrender.com/api/readDatabases/${_id}`);
         setDbData(response.data);
     };
 
@@ -54,14 +54,14 @@ const DatabaseAccordian = ({ _id, openValueOfDb }) => {
     const handleCloseDbChangeModal = () => setDbNameChangeModal(false);
 
     const handleDbNameChange = async (dbId, newDbName) => {
-        const response = await axios.post('http://localhost:3001/api/changeDbName', { _id, dbId, newDbName });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/changeDbName', { _id, dbId, newDbName });
         console.log(response.data);
         handleCloseDbChangeModal();
         fetchData();
     };
 
     const handleDeleteDb = async (db) => {
-        const response = await axios.post('http://localhost:3001/api/deleteDb', { _id, dbId: db._id });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/deleteDb', { _id, dbId: db._id });
         console.log(response.data);
         fetchData();
     };

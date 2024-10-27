@@ -51,11 +51,11 @@ const UpdateStuffForm = ({ openValue2, setOpenValue2, _id, dbId, collId, dbData,
             const parsedData = JSON.parse(data); // Ensure data is valid JSON
 
             if (dbData) {
-                await axios.post('http://localhost:3001/api/updateDb', { _id, dbId, document: parsedData });
+                await axios.post('https://mongodb-mini-playground.onrender.com/api/updateDb', { _id, dbId, document: parsedData });
             } else if (collData) {
-                await axios.post('http://localhost:3001/api/updateColl', { _id, dbId, document: parsedData });
+                await axios.post('https://mongodb-mini-playground.onrender.com/api/updateColl', { _id, dbId, document: parsedData });
             } else {
-                await axios.post('http://localhost:3001/api/updateDoc', { _id, dbId, collId, newDocument: parsedData });
+                await axios.post('https://mongodb-mini-playground.onrender.com/api/updateDoc', { _id, dbId, collId, newDocument: parsedData });
             }
 
             handleClose();

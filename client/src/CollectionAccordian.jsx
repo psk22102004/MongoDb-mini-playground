@@ -65,7 +65,7 @@ const CollectionAccordian = ({ _id, dbId, dbName }) => {
 
 
     const fetchCollData = async () => {
-        const response = await axios.post('http://localhost:3001/api/readCollections', { _id, dbId });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/readCollections', { _id, dbId });
         setCollData(response.data);
     }
 
@@ -77,14 +77,14 @@ const CollectionAccordian = ({ _id, dbId, dbName }) => {
     )
 
     const handleColleNameChange = async (collId, newCollName) => {
-        const response = await axios.post('http://localhost:3001/api/changeCollName', { _id, dbId, collId, newCollName });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/changeCollName', { _id, dbId, collId, newCollName });
         console.log(response.data);
         handleClose();
         fetchCollData();
     }
 
     const handleDelete = async (collection) => {
-        const response = await axios.post('http://localhost:3001/api/deleteColl', { _id, dbId, collId: collection._id });
+        const response = await axios.post('https://mongodb-mini-playground.onrender.com/api/deleteColl', { _id, dbId, collId: collection._id });
         console.log(response.data);
         fetchCollData();
     }
