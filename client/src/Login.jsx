@@ -23,33 +23,34 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-black">
-            <form onSubmit={handleSubmit} className="bg-[#212529] p-8 rounded-lg shadow-lg w-96">
-                <h2 className="text-white text-2xl text-center mb-6">Login</h2>
-                <input
-                    name="userName"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    placeholder="Username"
-                    className="border-2 border-white rounded-lg p-2 mb-4 w-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                    name="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    className="border-2 border-white rounded-lg p-2 mb-4 w-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <h1 className={`text-red-600 text-center mb-4 ${errorMsg}`}>Invalid Password!</h1>
-                <button
-                    type="submit"
-                    className="bg-black text-white rounded-lg py-2 w-full hover:bg-gray-800 transition duration-200"
-                >
-                    Submit
-                </button>
-            </form>
-        </div>
+            <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+            <h1 className='text-white font-poppins text-3xl m-4 mb-10 font-bold'>MongoDb Mini Playground</h1>
+                <form onSubmit={handleSubmit} className="bg-[#212529] p-8 rounded-lg shadow-lg w-96">
+                    <h2 className="text-white text-2xl text-center mb-6 font-poppins">Login</h2>
+                    <input
+                        name="userName"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        placeholder="Username"
+                        className="border-2 border-white rounded-lg p-2 mb-4 w-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <input
+                        name="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        className="border-2 border-white rounded-lg p-2 mb-4 w-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <h1 className={`text-red-600 text-center mb-4 ${errorMsg}`}>Invalid Password!</h1>
+                    <button
+                        type="submit"
+                        className="bg-black text-white rounded-lg py-2 w-full hover:bg-gray-800 transition duration-200"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
     );
 };
 

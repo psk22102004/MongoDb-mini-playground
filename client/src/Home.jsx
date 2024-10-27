@@ -23,10 +23,11 @@ const styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: 'white',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4
+    borderRadius: '10px',
+    p: 4,
   },
 };
 
@@ -70,11 +71,11 @@ const Home = () => {
       {/* TITLE BOX STARTS */}
       <div className='titleBox p-6 py-10 mb-6 rounded-xl flex justify-between items-center text-white bg-sblack'>
         <div className='flex space-x-6 items-center'>
-          <h1 className='text-4xl font-bold'>Welcome {newUserName}</h1>
+          <h1 className='text-4xl font-bold font-poppins'>Welcome {newUserName}</h1>
           <EditIcon onClick={handleOpen} className='h-10'>Change Username</EditIcon>
         </div>
         <div className='btnBox flex gap-6'>
-          <button onClick={handleDeleteProfile} className='border rounded-md px-4 py-2 font-semibold'>Delete Profile</button>
+          <button onClick={handleDeleteProfile} className='border rounded-md px-4 py-2  font-montserrat'>Delete Profile</button>
         </div>
       </div>
       {/* TITLE BOX ENDS */}
@@ -84,8 +85,8 @@ const Home = () => {
         <Accordion style={styles.accordianStyle}>
           <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: 'white' }} />}>
             <div className='flex justify-between w-full items-center p-4'>
-              <h1 className='text-xl'>Databases :</h1>
-              <button onClick={() => setOpenValueOfDb(true)} className='border rounded-md px-4 py-2 font-semibold'>Add Database</button>
+              <h1 className='text-xl font-poppins'>Databases :</h1>
+              <button onClick={() => setOpenValueOfDb(true)} className='border rounded-md px-4 py-2  font-montserrat'>Add Database</button>
             </div>
           </AccordionSummary>
 
@@ -101,14 +102,18 @@ const Home = () => {
       {/* USERNAME CHANGE MODAL */}
       <Modal open={userNameChangeModal} onClose={handleClose}>
         <Box sx={styles.userNameChangeStyle}>
-          <form onSubmit={handleUserNameChange}>
+          <form onSubmit={handleUserNameChange}
+            className='flex flex-col space-y-4'
+
+          >
             <input
               type='text'
               value={newUserName}
               onChange={(e) => setNewUserName(e.target.value)}
-              className='border rounded w-full p-2'
+              className='border p-4' 
+              placeholder='Enter New UserName'
             />
-            <button type='submit' className='px-4 py-2 mt-4 bg-red-400 text-white rounded'>Submit</button>
+            <button type='submit' className='px-8 py-2 rounded-lg text-white bg-sblack hover:bg-dblack mx-auto block'>Submit</button>
           </form>
         </Box>
       </Modal>

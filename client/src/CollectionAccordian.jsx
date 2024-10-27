@@ -41,10 +41,11 @@ const styles = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 400,
-        bgcolor: 'background.paper',
+        bgcolor: 'white',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4
+        borderRadius: '10px',
+        p: 4,
     },
 }
 
@@ -92,10 +93,10 @@ const CollectionAccordian = ({ _id, dbId, dbName }) => {
     return (
         <>
             <div className='flex justify-between w-full items-center p-4'>
-                <h1 className='text-xl'>Collections :</h1>
+                <h1 className='text-xl  font-poppins'>Collections :</h1>
                 <div className='btnBox flex gap-6'>
-                    <button onClick={() => { setOpenValue(true) }} className='border rounded-md px-4 py-2 font-semibold'>Add Collection</button>
-                    <button onClick={() => { setOpenValue2(true) }} className='border rounded-md px-4 py-2 font-semibold'>Update All Collection</button>
+                    <button onClick={() => { setOpenValue(true) }} className='border rounded-md px-4 py-2  font-montserrat'>Add Collection</button>
+                    <button onClick={() => { setOpenValue2(true) }} className='border rounded-md px-4 py-2  font-montserrat'>Update All Collection</button>
                 </div>
             </div>
             {
@@ -108,11 +109,11 @@ const CollectionAccordian = ({ _id, dbId, dbName }) => {
                                     <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: 'white' }} />}>
                                         <div className='flex justify-between w-full items-center p-4 '>
                                             <div className='flex space-x-6 items-center'>
-                                                <h1 className='text-xl'>{ele.collectionName} </h1>
+                                                <h1 className='text-xl font-mono font-semibold'>{ele.collectionName} </h1>
                                                 <EditIcon onClick={() => { handleOpen(ele) }} className=''>Update Collection Name</EditIcon>
                                             </div>
                                             <div className='btnBox flex gap-6'>
-                                                <button onClick={() => { handleDelete(ele) }} className='border rounded-md px-4 py-2 font-semibold'>Delete Collection</button>
+                                                <button onClick={() => { handleDelete(ele) }} className='border rounded-md px-4 py-2 font-montserrat'>Delete Collection</button>
                                             </div>
                                         </div>
                                     </AccordionSummary>
@@ -136,9 +137,11 @@ const CollectionAccordian = ({ _id, dbId, dbName }) => {
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         handleColleNameChange(selectedCollection._id, newCollName)
-                    }}>
-                        <input type='text' onChange={(e) => { setNewCollName(e.target.value) }} />
-                        <button type='submit' className='px-4 py-2 bg-red-400'>Submit</button>
+                    }}
+                    className='flex flex-col space-y-4'
+                    >
+                        <input className='border p-4' placeholder='Enter New Collection Name' type='text' onChange={(e) => { setNewCollName(e.target.value) }} />
+                        <button type='submit' className='px-8 py-2 rounded-lg text-white bg-sblack hover:bg-dblack mx-auto block'>Submit</button>
                     </form>
                 </Box>
             </Modal>

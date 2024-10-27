@@ -39,10 +39,10 @@ const DocumentAccordian = ({ _id, dbId, collId, updatedCollData, dbName, collect
     return (
         <>
             <div className='flex justify-between w-full items-center p-4 '>
-                <h1 className='text-xl'>Documents :</h1>
+                <h1 className='text-xl font-poppins'>Documents :</h1>
                 <div className='btnBox flex gap-6'>
-                    <button onClick={() => setOpenValue(true)} className='border rounded-md px-4 py-2 font-semibold'>Add Documents</button>
-                    <button onClick={() => setOpenValue2(true)} className='border rounded-md px-4 py-2 font-semibold'>Update Documents</button>
+                    <button onClick={() => setOpenValue(true)} className='border rounded-md px-4 py-2 font-montserrat'>Add Documents</button>
+                    <button onClick={() => setOpenValue2(true)} className='border rounded-md px-4 py-2 font-montserrat'>Update Documents</button>
                 </div>
             </div>
 

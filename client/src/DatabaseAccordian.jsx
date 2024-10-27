@@ -24,10 +24,11 @@ const styles = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 400,
-        bgcolor: 'background.paper',
+        bgcolor: 'white',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4
+        borderRadius : '10px',
+        p: 4,
     },
 };
 
@@ -73,11 +74,11 @@ const DatabaseAccordian = ({ _id, openValueOfDb }) => {
                     <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: 'white' }} />}>
                         <div className='flex justify-between w-full items-center p-4'>
                             <div className='flex space-x-6 items-center'>
-                                <h1 className='text-xl'>{ele.dbName}</h1>
+                                <h1 className='text-xl font-semibold font-mono'>{ele.dbName}</h1>
                                 <EditIcon onClick={() => handleOpenDbChangeModal(ele)} className=''>Update Database Name</EditIcon>
                             </div>
                             <div className='btnBox flex gap-6'>
-                                <button onClick={() => handleDeleteDb(ele)} className='border rounded-md px-4 py-2 font-semibold'>Delete Database</button>
+                                <button onClick={() => handleDeleteDb(ele)} className='border rounded-md px-4 py-2  font-montserrat'>Delete Database</button>
                             </div>
                         </div>
                     </AccordionSummary>
@@ -93,9 +94,11 @@ const DatabaseAccordian = ({ _id, openValueOfDb }) => {
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         handleDbNameChange(selectedDb._id, newDbName);
-                    }}>
-                        <input type='text' onChange={(e) => setNewDbName(e.target.value)} />
-                        <button type='submit' className='px-4 py-2 bg-red-400'>Submit</button>
+                    }}
+                    className='flex flex-col space-y-4'
+                    >
+                        <input className='border p-4' placeholder='Enter New Database Name' type='text' onChange={(e) => setNewDbName(e.target.value)} />
+                        <button type='submit' className='px-8 py-2 rounded-lg text-white bg-sblack hover:bg-dblack mx-auto block'>Submit</button>
                     </form>
                 </Box>
             </Modal>
