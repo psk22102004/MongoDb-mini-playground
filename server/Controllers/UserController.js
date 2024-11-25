@@ -1,65 +1,83 @@
 import mongoose from "mongoose";
 import User from "../models/UsersModel.js";
 
-export const randomShit = async(req,res)=>{
-    const{_id} = req.body;
-    const user = await User.find({_id}); 
-    console.log(user);
-    res.json(user);
+// Add an index on 'userName' for faster lookup
+User.schema.index({ userName: 1 });
+
+// To validate existing or new user
+export const validateUser = async (req, res) => {
+  const { userName, password } = req.body;
+  try {
+    const user = await User.findOne({ userName }).lean(); // lean() for better performance
+    if (user) {
+      // Direct password comparison (no hashing)
+      if (user.password === password) {
+        res.json({ message: 'existing user', _id: user._id });
+      } else {
+        res.json({ message: 'invalid password' });
+      }
+    } else {
+      const newUser = new User({ userName, password, databases: [] });
+      await newUser.save();
+      res.json({ message: 'new user created', _id: newUser._id });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "Error validating user" });
+  }
+};
+
+// To create a new user
+export const createUser = async (req, res) => {
+  const { userName, password } = req.body;
+  try {
+    // to Check if user already exists
+    const existingUser = await User.findOne({ userName });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
     }
 
-//to validate existing or new user
-export const validateUser = async (req,res)=>{ 
-    const{userName , password} = req.body;
-    const user = await User.findOne({userName : userName});
-    if(user){
-        user.password === password ? res.json({message : 'existing user' , _id : user._id}) : res.json({message :'invalid password'})        
-    }
-    else{
-        //this is a new user
-        const newUser = new User({userName , password , databases : [] });
-        await newUser.save();
-        res.json({message : 'new user created' , _id : newUser._id});
-    }
-}
-
-//to create new user
-export const createUser = async(req,res)=>{
-    //req.body is going to contain the document to be added
-    //req.body should be in the exact same format as the model schema 
-    const user = new User(req.body);
+    const user = new User({ userName, password });
     await user.save();
-    res.json(`${req.body.userName} user is saved !`);    
-}
+    res.json(`${userName} user is saved!`);
+  } catch (err) {
+    res.status(500).json({ message: "Error creating user" });
+  }
+};
 
-//to get all users
-export const getUsers = async(req,res)=>{
-    const users = await User.find();
-    const userNames = users.map(
-        (ele)=>{
-            return(ele.userName);
-        }
-    )
+// To get all users (with pagination to optimize large data)
+export const getUsers = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query; 
+  try {
+    const users = await User.find().skip((page - 1) * limit).limit(limit).lean();
+    const userNames = users.map(user => user.userName);
     res.json(userNames);
-}
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching users" });
+  }
+};
 
-//userName change
-export const changeUserName = async(req,res)=>{
-    //extract _id from the req.body
-    console.log(req.body);
-    const{_id , newUserName} = req.body;
+// UserName change
+export const changeUserName = async (req, res) => {
+  const { _id, newUserName } = req.body;
+  try {
     const updatedUser = await User.findByIdAndUpdate(
-        _id , 
-        {userName : newUserName } , 
-        {new : true , upsert : true} //here new : true means that it will return the new document instead of old document and upsert : true means it will create a new document if this document is not found
-    )
+      _id,
+      { userName: newUserName },
+      { new: true, upsert: false } // upsert: false ensures that a new document is not created if not found
+    ).lean();
     res.json(updatedUser);
-} 
+  } catch (err) {
+    res.status(500).json({ message: "Error changing username" });
+  }
+};
 
-//delete a user
-export const deleteUser = async(req,res)=>{
-    const{_id} = req.body;
-    const deletedUser = await User.findByIdAndDelete(_id );
+// Delete a user
+export const deleteUser = async (req, res) => {
+  const { _id } = req.body;
+  try {
+    const deletedUser = await User.findByIdAndDelete(_id).lean();
     res.json(deletedUser);
-}
-
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting user" });
+  }
+};
